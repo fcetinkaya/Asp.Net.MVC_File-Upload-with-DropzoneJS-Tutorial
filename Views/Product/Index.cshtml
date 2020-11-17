@@ -1,0 +1,114 @@
+ @model IEnumerable<AspNetMvc_Fileupload_DropzoneJs.Models.Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2 class="mb-5">@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit",new { id=item.Id })" class="btn btn-warning btn-sm">
+                    <span class="fa fa-pencil"></span>
+                </a>
+                <a href="@Url.Action("AddImages",new { id=item.Id })" class="btn btn-info btn-sm">
+                    <span class="fa fa-picture-o"></span>
+                </a>
+                <a href="@Url.Action("Details",new { id=item.Id })" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal@(item.Id)">
+                    <span class="fa fa-search"></span>
+                </a>
+                <a href="@Url.Action("Delete",new { id=item.Id })" class="btn btn-danger btn-sm">
+                    <span class="fa fa-remove"></span>
+                </a>
+
+                <div class="modal fade" tabindex="-1" role="dialog" id="modal@(item.Id)">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <dl class="row">
+                                    <dt class="col-4">
+                                        @Html.DisplayNameFor(model => model.Category.Name)
+                                    </dt>
+
+                                    <dd class="col-8">
+                                        @Html.DisplayFor(model => item.Category.Name)
+                                    </dd>
+
+                                    <dt class="col-4">
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </dt>
+
+                                    <dd class="col-8">
+                                        @Html.DisplayFor(model => item.Name)
+                                    </dd>
+
+                                    <dt class="col-4">
+                                        @Html.DisplayNameFor(model => model.Amount)
+                                    </dt>
+
+                                    <dd class="col-8">
+                                        @Html.DisplayFor(model => item.Amount)
+                                    </dd>
+
+                                    <dt class="col-4">
+                                        @Html.DisplayNameFor(model => model.Price)
+                                    </dt>
+
+                                    <dd class="col-8">
+                                        @Html.DisplayFor(model => item.Price)
+                                    </dd>
+
+                                </dl>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class="fa fa-close"></span> Close</button>
+                                <a href="@Url.Action("Details",new { item.Id })" class="btn btn-primary"><span class="fa fa-external-link"></span> Show on page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>

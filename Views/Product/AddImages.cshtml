@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Add Images To Product";
+}
+<style>
+    #productpictures {
+        border: 1px dashed #808080;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="mb-5">Add Images To Product</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 my-3">
+        <div class="text-right mb-2">
+            @Ajax.ActionLink("Refresh", "GetProductImages", new { id = Model.Id }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "productpictures", LoadingElementId = "loading", LoadingElementDuration = 300 }, new { @class = "btn btn-primary", id = "refreshbutton" })
+        </div>
+        <div class="mt-2">
+            <div id="productpictures" class="text-center">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <!--/Product/UploadProductImages/5 -->
+        @using (Ajax.BeginForm("UploadProductImages", new { id = Model.Id }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "dropzone", id = "mydropzone", enctype = "multipart/form-data" }))
+        { }
+    </div>
+    <div class="col-md-12 text-right mt-4">
+        <button type="button" class="btn btn-primary" id="uploadbutton">
+            <i class="fa fa-upload"></i> Upload
+        </button>
+    </div>
+</div>
+
+
+
+@section _Scripts{
+    <script>
+
+        Dropzone.autoDiscover = false;
+
+        $(function () {
+
+            var dz = null;
+
+            $("#mydropzone").dropzone({
+                autoProcessQueue: false,
+                paramName: "productpictures",
+                maxFilesize: 1, //mb
+                maxThumbnailFilesize: 1, //mb
+                maxFiles: 5,
+                parallelUploads: 5,
+                acceptedFiles: ".jpeg,.png,.jpg",
+                uploadMultiple: true,
+                addRemoveLinks: true,
+                //resizeWidth:128,
+
+                init: function () {
+                    dz = this;
+
+                    $("#uploadbutton").click(function () {
+                        dz.processQueue();
+                        $(this).attr("disabled", "disabled");
+                    });
+                },
+                success: function (file) {
+                    var preview = $(file.previewElement);
+                    preview.addClass("dz-success text-success");
+
+                    setTimeout(function () {
+                        dz.removeFile(file);
+                        $("#refreshbutton").click();
+                    }, 2000);
+                },
+                queuecomplete: function () {
+                    $("#refreshbutton").click();
+                    $("#uploadbutton").removeAttr("disabled");
+                },
+                dictDefaultMessage: "You can drag and drop your images here.",
+                dictRemoveFile: "File Remove"
+            });
+
+            $("#refreshbutton").prepend('<i id="loading" class="fa fa-refresh fa-spin" style="display:none;"></i>&nbsp;')
+            refreshProductPicture();
+        });
+        function refreshProductPicture() {
+            $("#refreshbutton").click();
+        }
+    </script>
+}

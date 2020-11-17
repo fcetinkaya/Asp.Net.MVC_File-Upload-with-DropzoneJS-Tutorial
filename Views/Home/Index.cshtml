@@ -1,0 +1,76 @@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .highlight {
+        background-color: #ffd800;
+    }
+</style>
+
+<h2 class="mb-5">ASP.NET MVC CodeFirst Sample App</h2>
+<hr />
+<p>
+    <div class="alert alert-warning"><span class="fa fa-hand-up">&nbsp;</span><i>You can use menu to show all data.</i></div>
+</p>
+<div class="well">
+    <h3>
+        Enable Automatic Migrate
+    </h3>
+    <p>
+        You can use below line codes for <b>Automatic Migration</b>.
+        Write to <b>Package Manager Console</b>
+    </p>
+    <br /><br />
+
+    <ol class="bg-light">
+        <li>Enable-Migrations -EnableAutomaticMigrations</li>
+        <li>Update-Database</li>
+    </ol>
+</div>
+
+<div class="well">
+
+    <h3>
+        Migrate Database to Lastest Version
+    </h3>
+    <p>
+        If you want to migrate database to lastest version everytime after changes models. It makes that is made with itself.
+    </p>
+    <br /><br />
+    <ol>
+        <li>
+            <p><b>You must add this line of code to constructor of Configuration.cs class into Migration folder.</b></p>
+            <pre class="bg-light">
+    public Configuration()
+    {
+        AutomaticMigrationsEnabled = true;
+            <b class="highlight">AutomaticMigrationDataLossAllowed = true;</b>
+        ContextKey = "WebApplication26.Context.DatabaseContext";
+    }
+</pre><br /><br />
+        </li>
+        <li>
+            <p><b>After that, you must add this line of code to constructor of DatabaseContext.cs class into Context folder.</b></p>
+            <pre class="bg-light">
+    public class DatabaseContext : DbContext
+    {
+        public DbSet&lt;Category&gt; Categories { get; set; }
+        public DbSet&lt;Product&gt; Products { get; set; }
+        public DbSet&lt;Customer&gt; Customers { get; set; }
+
+        public DatabaseContext()
+        {
+            <b class="highlight">Database.SetInitializer(new MigrateDatabaseToLatestVersion&lt;DatabaseContext, Migrations.Configuration&gt;());</b>
+            // Database.SetInitializer(new MyInitializer());
+        }
+    }
+</pre>
+            <p>
+                That's it. Cheers..
+            </p>
+        </li>
+    </ol>
+</div>
+

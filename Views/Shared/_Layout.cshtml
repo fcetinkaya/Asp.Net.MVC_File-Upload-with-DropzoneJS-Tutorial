@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ASP.NET MVC CodeFirst Sample App</title>
+    <link href="~/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Scripts/dropzone/dropzone.min.css" rel="stylesheet" />
+    @RenderSection("_Styles", false)
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        @Html.ActionLink("CodeFirst Sample App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Home")" class="nav-link">
+                        <span class="fa fa-home"></span> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Customer")" class="nav-link">
+                        <span class="fa fa-user"></span> Customer
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Category")" class="nav-link">
+                        <span class="fa fa-list"></span> Category
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Product")" class="nav-link">
+                        <span class="fa fa-shopping-basket"></span> Product
+                    </a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" method="post" action="@Url.Action("Search")">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="keyword" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="javascript: $(this).closest('form').submit();">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container body-content mt-4">
+        @RenderBody()
+
+
+
+
+
+
+    </div>
+
+    <script src="~/scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/dropzone/dropzone.min.js"></script>
+    @RenderSection("_Scripts", false)
+</body>
+</html>

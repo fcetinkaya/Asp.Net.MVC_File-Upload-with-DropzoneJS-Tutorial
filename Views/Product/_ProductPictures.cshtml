@@ -1,0 +1,26 @@
+﻿@model List<AspNetMvc_Fileupload_DropzoneJs.Models.ProductPicture>
+@if (Model == null || (Model != null && Model.Count == 0))
+{
+    <span>Images of the product are displayed here <br />Image of the product not found</span>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-2">
+                <div class="my-2">
+                    <div>
+                        <img src="~/Uploads/@item.FileName" max-width="96" class="img-fluid img-thumbnail" style="max-height:96px; max-width:96px;" />
+                    </div>
+                    <div class="mt-1">
+                        @Ajax.ActionLink("Delete", "RemoveProductPicture", new { id = item.Id }, new AjaxOptions { HttpMethod = "GET", Confirm = "Delete image of product ?", OnComplete="refreshProductPicture" }, new { @class = "btn btn-danger btn-sm del-pic" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+<script>
+    $("a.del-pic").prepend('<i class="fa fa-trash"></i>&nbsp;');
+</script>
