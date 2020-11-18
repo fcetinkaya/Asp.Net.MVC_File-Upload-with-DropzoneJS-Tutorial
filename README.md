@@ -71,7 +71,7 @@ Dropzone.autoDiscover = false;
         function refreshProductPicture() {
             $("#refreshbutton").click();
         }
-        ```
+```
 
 ## Features
 List of features ready and TODOs for future development
