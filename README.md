@@ -29,6 +29,7 @@ Describe how to install / setup your local environement / add link to demo versi
 ## Code Examples
 Show examples of usage:
 `<script>
+
         Dropzone.autoDiscover = false;
         $(function () {
             var dz = null;
