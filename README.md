@@ -28,8 +28,7 @@ Describe how to install / setup your local environement / add link to demo versi
 
 ## Code Examples
 Show examples of usage:
-`
-  <script>
+`<script>
         Dropzone.autoDiscover = false;
         $(function () {
             var dz = null;
@@ -72,8 +71,7 @@ Show examples of usage:
         function refreshProductPicture() {
             $("#refreshbutton").click();
         }
-    </script>
-`
+    </script>`
 
 ## Features
 List of features ready and TODOs for future development
