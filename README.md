@@ -21,9 +21,6 @@ You can make modern and effective projects by using jquery and dropzone librarie
 * Nuget DropzoneJS : https://www.nuget.org/packages/dropzone/
 * Nuget Microsoft jQuery Unobtrusive Ajax : https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax/
 
-## Setup
-Describe how to install / setup your local environement / add link to demo version.
-
 ## Code Examples
 Show examples of usage:
 ```
