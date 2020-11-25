@@ -1,4 +1,4 @@
-# Asp.net Mvc - File Upload with DropzoneJS
+# Asp.Net Core Mvc - File Upload with DropzoneJS Tutorial
 > With this project, you can add / delete pictures.
 
 ## Table of contents
